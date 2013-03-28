@@ -46,11 +46,10 @@ class Chef
 
       def run
         if name_args.length == 0
-          ui.error("Must specify organization name to create as the first argument, i.e. knife organization create ORGNAME")
-          exit 1
+          organization = ask("Enter your organization:")
+        else
+          organization = name_args[0]
         end
-
-        organization = name_args[0]
 
         # Get validator key
         if config[:regen_validator_key]
