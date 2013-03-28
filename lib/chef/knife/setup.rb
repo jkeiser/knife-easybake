@@ -55,6 +55,7 @@ class Chef
 
         # Create the organization
         begin
+          webui_session
           output "Ensuring organization #{organization} existence ..."
           webui_session.create_org(organization)
         rescue
