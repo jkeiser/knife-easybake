@@ -97,9 +97,9 @@ EOM
 
         # Write out client client.rb
         client_rb_file = "#{File.dirname(Chef::Config[:validation_key])}/client.rb"
-        if File.exist?(client_rb_file)
-          output "client.rb file #{client_rb_file} already exists.  Skipping ..."
-        else
+#        if File.exist?(client_rb_file)
+#          output "client.rb file #{client_rb_file} already exists.  Skipping ..."
+#        else
           output "Writing #{client_rb_file} ..."
           write_file(client_rb_file, <<-EOM)
 current_dir = File.dirname(__FILE__)
@@ -110,7 +110,7 @@ validation_client_name   "#{organization}-validator"
 chef_server_url          "#{Chef::Config[:api_server_url]}/organizations/#{organization}"
 client_key               "\#{current_dir}/\#{Socket.gethostname}.pem"
 EOM
-        end
+#        end
 
         # Write out client validation.pem
         if File.exist?(Chef::Config[:validation_key]) && !config[:regen_validator_key]
@@ -127,9 +127,9 @@ EOM
 
         # Write out workstation knife.rb
         client_rb_file = "#{Chef::Config[:chef_repo_path]}/.chef/knife.rb"
-        if File.exist?(client_rb_file)
-          output "client.rb file #{client_rb_file} already exists.  Skipping ..."
-        else
+#        if File.exist?(client_rb_file)
+#          output "client.rb file #{client_rb_file} already exists.  Skipping ..."
+#        else
           output "Writing #{client_rb_file} ..."
           write_file(client_rb_file, <<-EOM)
 current_dir = File.dirname(__FILE__)
@@ -141,7 +141,7 @@ validation_client_name   "#{organization}-validator"
 validation_client_key    "\#{current_dir}/#{organization}-validator.pem"
 chef_server_url          "https://api.opscode.com/organizations/#{organization}"
 EOM
-        end
+#        end
 
         # Write out workstation user.pem
         user_pem_file = "#{Chef::Config[:chef_repo_path]}/.chef/#{Chef::Config[:username]}.pem"
