@@ -41,7 +41,7 @@ class Chef
         init_config_variable(:chef_repo_path)
         init_config_variable(:validation_key)
         init_config_variable(:validation_client_name)
-        init_config_variable(:api_server_url)
+        init_config_variable(:api_server_url, 'https://api.opscode.com')
       end
 
       def run
