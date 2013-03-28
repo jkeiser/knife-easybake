@@ -53,6 +53,13 @@ class Chef
           organization = name_args[0]
         end
 
+        # Create the organization
+        begin
+          output "Ensuring organization #{organization} existence ..."
+          webui_session.create_org(organization)
+        rescue
+        end
+
         # Get validator key
         if config[:regen_validator_key]
           output "Regenerating validation key for #{organization}-validator..."
