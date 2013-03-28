@@ -24,13 +24,16 @@ class Chef
         organization = name_args[0]
 
         output "Creating organization #{organization} ..."
-        webui_session.create_org(organization)
-        if Chef::Config[:validator_key_file]
-          output "Creating validator file #{validator_key_file}"
-          user_key = webui_session.regenerate_validator_key
-          File.open(Chef::Config[:validator_key_file], 'w') do |file|
-            file.write(user_key)
+        begin
+          webui_session.create_org(organization)
+          if Chef::Config[:validator_key_file]
+            output "Creating validator file #{validator_key_file}"
+            user_key = webui_session.regenerate_validator_key
+            File.open(Chef::Config[:validator_key_file], 'w') do |file|
+              file.write(user_key)
+            end
           end
+        rescue
         end
       end
     end
