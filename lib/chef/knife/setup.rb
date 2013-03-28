@@ -15,11 +15,13 @@ class Chef
       option :regen_user_key,
         :long => '--[no-]regen-user-key',
         :boolean => true,
+        :default => true,
         :description => "Tell setup to regenerate the user key.  Default: false"
 
       option :regen_validator_key,
         :long => '--[no-]regen-validator-key',
         :boolean => true,
+        :default => true,
         :description => "Tell setup to regenerate the validator key.  Default: false"
 
       option :validation_key,
@@ -38,7 +40,7 @@ class Chef
 
       def configure_chef
         super
-        init_config_variable(:chef_repo_path)
+        init_config_variable(:chef_repo_path, '.')
         init_config_variable(:validation_key)
         init_config_variable(:validation_client_name)
         init_config_variable(:api_server_url, 'https://api.opscode.com')
