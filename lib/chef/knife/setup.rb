@@ -109,6 +109,9 @@ log_location             STDOUT
 validation_key           "#{organization}-validator"
 chef_server_url          "#{Chef::Config[:api_server_url]}/organizations/#{organization}"
 client_key               "\#{current_dir}/\#{Socket.gethostname}.pem"
+cache_type               'BasicFile'
+cache_options( :path => "#{ENV['HOME']}/.chef/checksums" )
+cookbook_path            [\"#{current_dir}/../cookbooks\"]
 EOM
 #        end
 
