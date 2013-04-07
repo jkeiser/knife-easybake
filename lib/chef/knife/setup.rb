@@ -106,7 +106,7 @@ current_dir = File.dirname(__FILE__)
 require 'socket'
 log_level                :info
 log_location             STDOUT
-validation_client_name   "#{organization}-validator"
+validation_key           "#{organization}-validator"
 chef_server_url          "#{Chef::Config[:api_server_url]}/organizations/#{organization}"
 client_key               "\#{current_dir}/\#{Socket.gethostname}.pem"
 EOM
