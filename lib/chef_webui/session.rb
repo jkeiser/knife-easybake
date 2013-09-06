@@ -113,7 +113,10 @@ module ChefWebui
     end
 
     def retrieve_authenticity_token
-      @authenticity_token = @agent.page.search('//meta[@name="csrf-token"]/@content').text
+      begin
+        @authenticity_token = @agent.page.search('//meta[@name="csrf-token"]/@content').text
+      rescue
+      end
     end
 
     def retrieve_error_text
