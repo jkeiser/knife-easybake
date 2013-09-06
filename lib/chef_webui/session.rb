@@ -69,11 +69,19 @@ module ChefWebui
     end
 
     def regenerate_user_key
-      @agent.post("#{account_url}/account/regen_key",
+      hosted_key = @agent.post("#{account_url}/account/regen_key",
         {
           'commit' => 'Get a new key',
           'authenticity_token' => @authenticity_token
         }).content
+      return hosted_key if hosted_key =~ /-----BEGIN RSA PRIVATE KEY-----/
+      private_key = @agent.post("#{account_url}/users/#{current_user}/_regen_key",
+        {
+          'commit' => 'Get a new key',
+          'authenticity_token' => @authenticity_token
+        }).content
+      return private_key if private_key =~ /-----BEGIN RSA PRIVATE KEY-----/
+      raise_webui_error
     end
 
     def organizations
@@ -113,7 +121,10 @@ module ChefWebui
     end
 
     def retrieve_authenticity_token
-      @authenticity_token = @agent.page.search('//meta[@name="csrf-token"]/@content').text
+      begin
+        @authenticity_token = @agent.page.search('//meta[@name="csrf-token"]/@content').text
+      rescue
+      end
     end
 
     def retrieve_error_text
