@@ -111,7 +111,7 @@ chef_server_url          "#{Chef::Config[:api_server_url]}/organizations/#{organ
 client_key               "\#{current_dir}/\#{Socket.gethostname}.pem"
 cache_type               'BasicFile'
 cache_options( :path => "#{ENV['HOME']}/.chef/checksums" )
-cookbook_path            [\"#{current_dir}/../cookbooks\"]
+cookbook_path            [\"#\{current_dir}/../cookbooks\"]
 EOM
 #        end
 
